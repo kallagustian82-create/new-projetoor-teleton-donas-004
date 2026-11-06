@@ -37,3 +37,13 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes aacdFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes aacdPopIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
