@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -48,6 +49,7 @@ const HomePage = () => {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <div data-testid="diag-red-box" style={{ position: 'fixed', top: '10px', left: '10px', width: '220px', height: '60px', background: 'red', color: '#fff', zIndex: 99999, fontSize: '20px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>DIAG BOX</div>
       <iframe
         ref={iframeRef}
         title="Teleton AACD"
@@ -56,16 +58,16 @@ const HomePage = () => {
         style={{ border: 'none', width: '100%', height: '100vh', display: 'block' }}
       />
 
-      {showModal && (
+      {showModal && createPortal((
         <div
           data-testid="home-donate-modal-overlay"
           onClick={() => setShowModal(false)}
           style={{
-            position: 'fixed', inset: 0, zIndex: 2147483600,
-            background: 'rgba(23,16,40,0.72)',
-            backdropFilter: 'blur(4px)',
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            width: '100vw', height: '100vh', zIndex: 2147483600,
+            background: 'rgba(23,16,40,0.78)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '20px', animation: 'aacdFadeIn 0.25s ease',
+            padding: '20px', opacity: 1,
           }}
         >
           <div
@@ -145,7 +147,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      )}
+      ), document.body)}
 
       {isMobile && (
         <button
